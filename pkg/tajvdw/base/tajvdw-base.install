@@ -1,0 +1,9 @@
+post_install() {
+    set_locale
+}
+
+set_locale() {
+    ln -sf /usr/share/zoneinfo/America/Los_Angeles "/etc/localtime"
+    sed 's/en_US.UTF-8/en_US.UTF-8/' -i /etc/locale.gen
+    locale-gen
+}
