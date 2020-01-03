@@ -3,10 +3,10 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-REMOTE_PATH=s3://mdaffin-arch/repo/x86_64
+REMOTE_PATH=s3://tajvdw-arch-pkgs/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
-REPO_NAME=mdaffin
-CHROOT="$HOME/.local/share/arch-root"
+REPO_NAME=tajvdw
+CHROOT=$HOME/.local/share/arch-root
 
 mkdir -p "$LOCAL_PATH"
 

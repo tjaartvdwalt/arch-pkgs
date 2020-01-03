@@ -1,17 +1,16 @@
 # Maintainer:  <tjaart@tjaart-xps13>
 pkgname=tajvdw-desktop
-pkgver=VERSION
+pkgver=1
 pkgrel=1
 epoch=
 pkgdesc=""
-arch=('i686' 'x86_64')
-url=""
-license=('GPL')
-groups=()
-depends=()
-makedepends=()
-checkdepends=()
-optdepends=()
+arch=('x86_64')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
+license=('MIT')
+groups=(tajvdw)
+depends=(sway swaybg swayidle swaylock)
+# add any AUR packages as optional
+optdepends=(chromium google-chrome swayshot)
 provides=()
 conflicts=()
 replaces=()
@@ -19,34 +18,5 @@ backup=()
 options=()
 install=
 changelog=
-source=($pkgname-$pkgver.tar.gz
-        $pkgname-$pkgver.patch)
-noextract=()
-md5sums=()
-
-prepare() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
-}
-
-build() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  ./configure --prefix=/usr
-  make
-}
-
-check() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  make -k check
-}
-
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  make DESTDIR="$pkgdir/" install
-}
 
 # vim:set ts=2 sw=2 et:
