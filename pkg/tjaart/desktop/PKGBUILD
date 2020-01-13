@@ -1,0 +1,34 @@
+# Maintainer:  <tjaart@tjaart.org>
+pkgname=tjaart-desktop
+pkgver=1
+pkgrel=7
+pkgdesc=""
+arch=('any')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
+license=('MIT')
+groups=(tjaart)
+
+user=tjaart
+uid=1000
+gid=1000
+config_home=$pkgdir/home/$user/.config/
+
+# Window manager and related
+depends=(sway swaybg swayidle swaylock rofi)
+# Multimedia Apps
+depends=(vlc)
+# add any AUR packages as optional
+optdepends=(swayshot)
+optdepends+=(chromium google-chrome)
+
+backup=(home/$user/.config/sway/config)
+source=(sway.conf)
+md5sums=('SKIP')
+
+ 
+
+package() {
+  install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/home/$user/.config/sway/config"
+}
+
+# vim:set ts=2 sw=2 et:

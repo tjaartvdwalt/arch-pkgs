@@ -1,0 +1,21 @@
+# Maintainer:  <tjaart@tjaart.org>
+pkgname=tjaart-base
+pkgver=1
+pkgrel=1
+pkgdesc="Base for tjaart systems"
+arch=('x86_64')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
+license=('MIT')
+groups=(tjaart)
+depends=(bash htop the_silver_searcher wget zsh)
+optdepends+=()
+
+USER=tjaart
+UID=1000
+GID=1000
+CONFIG_HOME=$pkgdir/home/$USER/.config/
+
+
+# changelog=
+
+# vim:set ts=2 sw=2 et:

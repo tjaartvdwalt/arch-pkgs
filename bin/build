@@ -3,9 +3,9 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-REMOTE_PATH=s3://tajvdw-arch-pkgs/repo/x86_64
+REMOTE_PATH=s3://tjaart-arch-pkgs/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
-REPO_NAME=tajvdw
+REPO_NAME=tjaart
 
 PACKAGES=${@:-pkg/*}
 CHROOT="$HOME/.local/share/arch-root"

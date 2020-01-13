@@ -1,12 +1,11 @@
 # Maintainer:  <tjaart@tjaart-xps13>
-pkgname=tajvdw-system76
-pkgver=VERSION
+pkgbase=tjaart-laptop
+pkgname=(tjaart-laptop tjaart-dell-xps-13 tjaart-system76)
+pkgver=1
 pkgrel=1
-epoch=
-pkgdesc=""
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url=""
-license=('GPL')
+license=('MIT')
 groups=()
 depends=()
 makedepends=()

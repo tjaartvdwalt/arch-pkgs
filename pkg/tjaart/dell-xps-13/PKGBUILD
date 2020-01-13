@@ -1,5 +1,5 @@
-# Maintainer:  <tjaart@tjaart-xps13>
-pkgname=tajvdw-devel
+# Maintainer:  <tjaart@tjaart.org>
+pkgname=tjaart-dell-xps-13
 pkgver=VERSION
 pkgrel=1
 epoch=
