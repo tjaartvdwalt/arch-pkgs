@@ -7,14 +7,22 @@ arch=('x86_64')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
 license=('MIT')
 groups=(tjaart)
+
+user=tjaart
+uid=1000
+gid=1000
+config_home=$pkgdir/home/$user/.config/
+
 depends=(bash htop the_silver_searcher wget zsh)
-optdepends+=()
+optdepends+=(lfm)
 
-USER=tjaart
-UID=1000
-GID=1000
-CONFIG_HOME=$pkgdir/home/$USER/.config/
+backup=(home/$user/.config/lfm/lfm.ini)
+source=(lfm.ini)
+md5sums=('58a55e754ab673da217414ba68cd89aa')
 
+package() {
+  install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/home/$user/.config/lfm/lfm.ini"
+}
 
 # changelog=
 

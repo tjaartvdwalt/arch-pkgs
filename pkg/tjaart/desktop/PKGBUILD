@@ -23,9 +23,7 @@ optdepends+=(chromium google-chrome)
 
 backup=(home/$user/.config/sway/config)
 source=(sway.conf)
-md5sums=('SKIP')
-
- 
+md5sums=('0b9b6821110e1a35cb611f71bccbc792')
 
 package() {
   install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/home/$user/.config/sway/config"
