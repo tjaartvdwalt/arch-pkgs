@@ -1,52 +1,24 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-devel
-pkgver=VERSION
-pkgrel=1
+pkgver=1
+pkgrel=2
 epoch=
 pkgdesc=""
-arch=('i686' 'x86_64')
+arch=('any')
 url=""
-license=('GPL')
-groups=()
-depends=()
-makedepends=()
-checkdepends=()
-optdepends=()
-provides=()
-conflicts=()
-replaces=()
-backup=()
-options=()
-install=
-changelog=
-source=($pkgname-$pkgver.tar.gz
-        $pkgname-$pkgver.patch)
-noextract=()
-md5sums=()
+license=('MIT')
+groups=(tjaart)
 
-prepare() {
-  cd "$srcdir/$pkgname-$pkgver"
+# editors
+depends=(emacs)
+# emacs plugin dependencies
+optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-server-bin)
 
-  patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
-}
+# tools
+depends+=(git meld)
 
-build() {
-  cd "$srcdir/$pkgname-$pkgver"
+# languages
+depends+=(jdk-openjdk python nodejs)
 
-  ./configure --prefix=/usr
-  make
-}
-
-check() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  make -k check
-}
-
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  make DESTDIR="$pkgdir/" install
-}
-
+optdepends+=(mycli)
 # vim:set ts=2 sw=2 et:

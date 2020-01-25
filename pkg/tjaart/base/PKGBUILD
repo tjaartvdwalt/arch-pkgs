@@ -13,8 +13,12 @@ uid=1000
 gid=1000
 config_home=$pkgdir/home/$user/.config/
 
-depends=(bash htop the_silver_searcher wget zsh)
-optdepends+=(lfm)
+depends=(bash htop mlocate the_silver_searcher wget zsh)
+optdepends=(lfm)
+
+# Print dependencies
+depends+=(cups)
+optdepends+=(brother-hll2395dw)
 
 backup=(home/$user/.config/lfm/lfm.ini)
 source=(lfm.ini)

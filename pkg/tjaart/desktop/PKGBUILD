@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-desktop
 pkgver=1
-pkgrel=7
+pkgrel=10
 pkgdesc=""
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -14,19 +14,35 @@ gid=1000
 config_home=$pkgdir/home/$user/.config/
 
 # Window manager and related
-depends=(sway swaybg swayidle swaylock rofi)
+depends=(sway swaybg swayidle swaylock rofi mako alacritty)
 # Multimedia Apps
-depends=(vlc)
+depends+=(vlc)
 # add any AUR packages as optional
 optdepends=(swayshot)
 optdepends+=(chromium google-chrome)
 
-backup=(home/$user/.config/sway/config)
+backup=(home/$user/.config/sway/config home/$user/.config/mako/config home/$user/.config/rofi/config)
 source=(sway.conf)
-md5sums=('0b9b6821110e1a35cb611f71bccbc792')
+md5sums=('SKIP')
+
+source+=(gnu_bg.png)
+md5sums+=('SKIP')
+
+source+=(mako.conf)
+md5sums+=('SKIP')
+
+source+=(rofi.conf)
+md5sums+=('SKIP')
+
+source+=(alacritty.yml)
+md5sums+=('SKIP')
 
 package() {
   install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/home/$user/.config/sway/config"
+  install -Dm 0644 -o $uid -g $gid gnu_bg.png "$pkgdir/home/$user/.config/sway/wallpaper/gnu_bg.png"
+  install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/home/$user/.config/mako/config"
+  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$user/.config/rofi/config"
+  install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/home/$user/.config/alacritty/alacritty.yml"
 }
 
 # vim:set ts=2 sw=2 et:
