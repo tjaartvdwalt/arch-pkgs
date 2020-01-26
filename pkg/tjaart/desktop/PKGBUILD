@@ -15,9 +15,9 @@ config_home=$pkgdir/home/$user/.config/
 
 depends+=(sway swaybg swayidle swaylock)
 sway_config=home/$user/.config/sway/config
-backup=($sway_config)
-source=(sway.conf)
-md5sums=('SKIP')
+backup+=($sway_config)
+source+=(sway.conf)
+md5sums+=('SKIP')
 
 source+=(gnu_bg.png)
 md5sums+=('SKIP')
@@ -42,7 +42,8 @@ source+=(alacritty.yml)
 md5sums+=('SKIP')
 
 # Add fonts
-depends+=(ttf-mac-fonts otf-fira-code otf-fira-code-symbol)
+depends+=(otf-fira-code)
+optdepends+=(ttf-mac-fonts otf-fira-code-symbol)
 font_config=home/$user/.config/fontconfig/fonts.conf
 backup+=($font_config)
 source+=(fonts.conf)

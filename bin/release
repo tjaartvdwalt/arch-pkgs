@@ -18,12 +18,17 @@ for I in $PACKAGES
 do
 	# Increment package release value
 	sed -ri 's/(pkgrel=)(.*)/echo "\1$((\2+1))"/ge' $I/PKGBUILD
+	# find package name, new version and release for commit message
+	PKGNAME=$(grep -oP 'pkgname\=.*' $I/PKGBUILD | sed -r 's/.*=(.*)/\1/')
+	PKGVER=$(grep -oP 'pkgver\=.*' $I/PKGBUILD | sed -r 's/.*=(.*)/\1/')
+	PKGREL=$(grep -oP 'pkgrel\=\d+' $I/PKGBUILD | sed -r 's/.*=(.*)/\1/')
 	# add PKGBUILD to git
 	git add $I/PKGBUILD
 	# commit and push file
-	git commit -m "Update $I/PKGBUILD"
+	git commit -m "Release $PKGNAME-$PKGVER-$PKGREL"
 	git push
 
+	echo "Release $PKGNAME-$PKGVER-$PKGREL"
 	# release script
     $SCRIPTPATH/build $PACKAGES	
 done
