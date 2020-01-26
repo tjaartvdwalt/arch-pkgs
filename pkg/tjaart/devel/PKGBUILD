@@ -12,6 +12,7 @@ groups=(tjaart)
 # editors
 depends=(emacs)
 # emacs plugin dependencies
+depends+=(bash-language-server)
 optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-server-bin)
 
 # tools

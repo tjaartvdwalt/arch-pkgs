@@ -1,0 +1,30 @@
+#!/bin/bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+DIRECTORY=`dirname $0`
+PACKAGES=${@:-pkg/*}
+
+# Ensure your workspace is clean before we release
+STATUS_OUTPUT=$(git status --porcelain)
+if [ ! "${STATUS_OUTPUT}" == "" ]
+then
+  >&2 echo "You have uncommitted changes in your workspace
+
+Ensure that your workspace is clean before performing a release"
+  exit 1
+fi
+
+for I in $PACKAGES
+do
+	# Increment package release value
+	sed -ri 's/(pkgrel=)(.*)/echo "\1$((\2+1))"/ge' $I/PKGBUILD
+	# add PKGBUILD to git
+	git add $I/PKGBUILD
+	# commit and push file
+	git commit -m 'Update $I/PKGBUILD'
+	git push
+
+	# release script
+    $SCRIPTPATH/build $PACKAGES	
+done
+
