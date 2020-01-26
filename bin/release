@@ -21,7 +21,7 @@ do
 	# add PKGBUILD to git
 	git add $I/PKGBUILD
 	# commit and push file
-	git commit -m 'Update $I/PKGBUILD'
+	git commit -m "Update $I/PKGBUILD"
 	git push
 
 	# release script
