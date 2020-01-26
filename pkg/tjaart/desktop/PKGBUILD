@@ -15,8 +15,12 @@ config_home=$pkgdir/home/$user/.config/
 
 depends+=(sway swaybg swayidle swaylock)
 sway_config=home/$user/.config/sway/config
+swaylock_config=home/$user/.config/swaylock/config
 backup+=($sway_config)
+backup+=($swaylock_config)
 source+=(sway.conf)
+source+=(swaylock.conf)
+md5sums+=('SKIP')
 md5sums+=('SKIP')
 
 source+=(gnu_bg.png)
@@ -58,6 +62,7 @@ optdepends+=(chromium google-chrome)
 
 package() {
   install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/$sway_config"
+  install -Dm 0644 -o $uid -g $gid swaylock.conf "$pkgdir/$swaylock_config"
   install -Dm 0644 -o $uid -g $gid gnu_bg.png "$pkgdir/home/$user/.config/sway/wallpaper/gnu_bg.png"
   install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/home/$mako_config"
   install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$rofi_config"
