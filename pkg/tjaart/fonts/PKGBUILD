@@ -1,13 +1,12 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-fonts
-pkgver=1
+pkgver=1.0.0
 pkgrel=1
-epoch=
 pkgdesc="Configure default fonts"
-arch=('x86_64')
-url=""
-license=('GPL')
-groups=()
+arch=('any')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
+license=('MIT')
+groups=(tjaart)
 depends=(ttf-mac-fonts otf-fira-code otf-fira-code-symbol)
-opt-de
+
 # vim:set ts=2 sw=2 et:

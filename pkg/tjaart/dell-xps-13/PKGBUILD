@@ -1,13 +1,13 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-dell-xps-13
-pkgver=VERSION
+pkgver=1.0.0
 pkgrel=1
-epoch=
 pkgdesc=""
-arch=('i686' 'x86_64')
-url=""
-license=('GPL')
-groups=()
+arch=('any')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
+license=('MIT')
+groups=(tjaart)
+
 depends=()
 makedepends=()
 checkdepends=()

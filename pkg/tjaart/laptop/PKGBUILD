@@ -1,10 +1,10 @@
-# Maintainer:  <tjaart@tjaart-xps13>
+# Maintainer:  <tjaart@tjaart.org>
 pkgbase=tjaart-laptop
 pkgname=(tjaart-laptop tjaart-dell-xps-13 tjaart-system76)
-pkgver=1
+pkgver=1.0.0
 pkgrel=1
-arch=('x86_64')
-url=""
+arch=('any')
+url="https://github.com/tjaartvdwalt/arch-pkgs"
 license=('MIT')
 groups=()
 depends=()

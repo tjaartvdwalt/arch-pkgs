@@ -1,11 +1,10 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-devel
-pkgver=1
-pkgrel=2
-epoch=
+pkgver=1.0.0
+pkgrel=1
 pkgdesc=""
 arch=('any')
-url=""
+url="https://github.com/tjaartvdwalt/arch-pkgs"
 license=('MIT')
 groups=(tjaart)
 

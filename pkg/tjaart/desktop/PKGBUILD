@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-desktop
-pkgver=1
-pkgrel=10
+pkgver=1.0.0
+pkgrel=1
 pkgdesc=""
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -13,36 +13,55 @@ uid=1000
 gid=1000
 config_home=$pkgdir/home/$user/.config/
 
-# Window manager and related
-depends=(sway swaybg swayidle swaylock rofi mako alacritty)
-# Multimedia Apps
-depends+=(vlc)
-# add any AUR packages as optional
-optdepends=(swayshot)
-optdepends+=(chromium google-chrome)
-
-backup=(home/$user/.config/sway/config home/$user/.config/mako/config home/$user/.config/rofi/config)
+depends+=(sway swaybg swayidle swaylock)
+sway_config=home/$user/.config/sway/config
+backup=($sway_config)
 source=(sway.conf)
 md5sums=('SKIP')
 
 source+=(gnu_bg.png)
 md5sums+=('SKIP')
 
+depends+=(mako)
+mako_config=home/$user/.config/mako/config
+backup+=($mako_config)
 source+=(mako.conf)
 md5sums+=('SKIP')
 
+depends+=(rofi)
+rofi_config=home/$user/.config/rofi/config
+backup+=($rofi_config)
 source+=(rofi.conf)
 md5sums+=('SKIP')
 
+
+depends+=(alacritty)
+alacritty_config=home/$user/.config/alacritty/alacritty.yml
+backup+=($alacritty_config)
 source+=(alacritty.yml)
 md5sums+=('SKIP')
 
+# Add fonts
+depends+=(ttf-mac-fonts otf-fira-code otf-fira-code-symbol)
+font_config=home/$user/.config/fontconfig/fonts.conf
+backup+=($font_config)
+source+=(fonts.conf)
+md5sums+=('SKIP')
+
+depends+=(vlc)
+
+# add any AUR packages as optional
+optdepends+=(swayshot)
+optdepends+=(chromium google-chrome)
+
+
 package() {
-  install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/home/$user/.config/sway/config"
+  install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/$sway_config"
   install -Dm 0644 -o $uid -g $gid gnu_bg.png "$pkgdir/home/$user/.config/sway/wallpaper/gnu_bg.png"
-  install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/home/$user/.config/mako/config"
-  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$user/.config/rofi/config"
-  install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/home/$user/.config/alacritty/alacritty.yml"
+  install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/home/$mako_config"
+  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$rofi_config"
+  install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/$alacritty_config"
+  install -Dm 0644 -o $uid -g $gid fonts.conf "$pkgdir/$font_config"
 }
 
 # vim:set ts=2 sw=2 et:
