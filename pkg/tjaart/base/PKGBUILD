@@ -13,19 +13,22 @@ uid=1000
 gid=1000
 config_home=$pkgdir/home/$user/.config/
 
-depends=(bash htop mlocate the_silver_searcher wget zsh)
-optdepends=(lfm)
+depends+=(bash htop mlocate the_silver_searcher wget zsh)
+
+depends+=(pass)
+optdepends+=(pass-audit pass-botp pass-rotate pass-update)
+optdepends+=(lfm)
+lfm_config+=home/$user/.config/lfm/lfm.ini
+backup+=($lfm_config)
+source+=(lfm.ini)
+md5sums+=('SKIP')
 
 # Print dependencies
 depends+=(cups)
 optdepends+=(brother-hll2395dw)
 
-backup=(home/$user/.config/lfm/lfm.ini)
-source=(lfm.ini)
-md5sums=('58a55e754ab673da217414ba68cd89aa')
-
 package() {
-  install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/home/$user/.config/lfm/lfm.ini"
+  install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
 }
 
 # changelog=

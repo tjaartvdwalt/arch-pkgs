@@ -14,6 +14,7 @@ gid=1000
 config_home=$pkgdir/home/$user/.config/
 
 depends+=(sway swaybg swayidle swaylock)
+optdepends+=(swayshot)
 sway_config=home/$user/.config/sway/config
 swaylock_config=home/$user/.config/swaylock/config
 backup+=($sway_config)
@@ -33,6 +34,7 @@ source+=(mako.conf)
 md5sums+=('SKIP')
 
 depends+=(rofi)
+optdepends+=(autopass.cr)
 rofi_config=home/$user/.config/rofi/config
 backup+=($rofi_config)
 source+=(rofi.conf)
@@ -53,11 +55,17 @@ backup+=($font_config)
 source+=(fonts.conf)
 md5sums+=('SKIP')
 
+depends+=(geary)
+
 depends+=(vlc)
 
+# Add browsers
+depends+=(chromium firefox)
+depends+=(browserpass browserpass-chromium browserpass-firefox)
+optdepends+=(google-chrome)
+
 # add any AUR packages as optional
-optdepends+=(swayshot)
-optdepends+=(chromium google-chrome)
+depends+=(otf-fira-code)
 
 
 package() {
