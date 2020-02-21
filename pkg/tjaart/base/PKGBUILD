@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-base
 pkgver=1.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Base for tjaart systems"
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
