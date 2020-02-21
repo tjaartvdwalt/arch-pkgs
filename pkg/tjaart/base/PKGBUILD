@@ -13,12 +13,35 @@ uid=1000
 gid=1000
 config_home=$pkgdir/home/$user/.config/
 
-depends+=(bash htop mlocate the_silver_searcher wget zsh)
+depends+=(bash htop mlocate the_silver_searcher wget)
+
+depends+=(openssh)
+sshd=/etc/ssh/sshd_config
+backup+=($sshd)
+source+=(sshd_config)
+md5sums+=('SKIP')
+
+depends+=(zsh)
+zshrc=home/$user/.zshrc
+backup+=($zshrc)
+source+=(.zshrc)
+md5sums+=('SKIP')
+
+zlogin=home/$user/.zlogin
+backup+=($zlogin)
+source+=(.zlogin)
+md5sums+=('SKIP')
+
+zprofile=home/$user/.zprofile
+backup+=($zprofile)
+source+=(.zprofile)
+md5sums+=('SKIP')
 
 depends+=(pass)
 optdepends+=(pass-audit pass-botp pass-rotate pass-update)
+
 optdepends+=(lfm)
-lfm_config+=home/$user/.config/lfm/lfm.ini
+lfm_config=home/$user/.config/lfm/lfm.ini
 backup+=($lfm_config)
 source+=(lfm.ini)
 md5sums+=('SKIP')
@@ -28,7 +51,15 @@ depends+=(cups)
 optdepends+=(brother-hll2395dw)
 
 package() {
+  install -Dm 0640 -o root -g root sshd_config "$pkgdir/$sshd"
   install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
+  install -Dm 0640 -o $uid -g $gid .zshrch "$pkgdir/$zshrc"
+  install -Dm 0640 -o $uid -g $gid .zlogin "$pkgdir/$zlogin"
+  install -Dm 0640 -o $uid -g $gid .zprofile "$pkgdir/$zprofile"
+}
+
+post_install() {
+  systemctl enable --now sshd.service
 }
 
 # changelog=

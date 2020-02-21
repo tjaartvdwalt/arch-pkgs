@@ -9,7 +9,7 @@ license=('MIT')
 groups=(tjaart)
 
 # editors
-depends=(emacs)
+depends=(emacs vim)
 # emacs plugin dependencies
 depends+=(bash-language-server)
 optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-server-bin)
