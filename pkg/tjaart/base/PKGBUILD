@@ -16,7 +16,7 @@ config_home=$pkgdir/home/$user/.config/
 depends+=(bash htop mlocate the_silver_searcher wget)
 
 depends+=(openssh)
-sshd=/etc/ssh/sshd_config
+sshd=etc/ssh/sshd_config
 backup+=($sshd)
 source+=(sshd_config)
 md5sums+=('SKIP')
