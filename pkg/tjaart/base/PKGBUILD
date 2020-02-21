@@ -53,7 +53,7 @@ optdepends+=(brother-hll2395dw)
 package() {
   install -Dm 0640 -o root -g root sshd_config "$pkgdir/$sshd"
   install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
-  install -Dm 0640 -o $uid -g $gid .zshrch "$pkgdir/$zshrc"
+  install -Dm 0640 -o $uid -g $gid .zshrc "$pkgdir/$zshrc"
   install -Dm 0640 -o $uid -g $gid .zlogin "$pkgdir/$zlogin"
   install -Dm 0640 -o $uid -g $gid .zprofile "$pkgdir/$zprofile"
 }
