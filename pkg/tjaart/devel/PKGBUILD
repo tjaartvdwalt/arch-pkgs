@@ -9,14 +9,17 @@ license=('MIT')
 groups=(tjaart)
 
 # editors
-depends=(emacs vim)
+depends=(emacs)
 # emacs plugin dependencies
 depends+=(bash-language-server)
 optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-server-bin)
 
 # tools
-depends+=(git meld)
+depends+=(git git-lfs meld)
 
+depends+=(vim)
+depends+=(fzf)
+optdepends+=(vim-tern)
 # languages
 depends+=(jdk-openjdk python nodejs)
 
