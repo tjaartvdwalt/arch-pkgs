@@ -7,7 +7,8 @@ REMOTE_PATH=s3://tjaart-arch-pkgs/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
 REPO_NAME=tjaart
 
-PACKAGES=${@:-pkg/*}
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+PACKAGES=$(ls -1 ${SCRIPT_DIR}/../pkg/$REPO_NAME/)
 CHROOT="$HOME/.local/share/arch-root"
 
 mkdir -p "$LOCAL_PATH"
@@ -20,8 +21,9 @@ mkdir -p "$CHROOT"
     pacman pciutils perl procps-ng psmisc s-nail sed shadow sysfsutils \
     systemd-sysvcompat tar texinfo usbutils util-linux which base-devel
 
-for package in $PACKAGES; do (
-    cd "$package" || ( echo "No such directory: $package"; exit 1 )
+for PACKAGE in $PACKAGES; do (
+    echo "$PACKAGE"
+    cd "$SCRIPT_DIR/../pkg/$REPO_NAME/$PACKAGE" || ( echo "No such directory: $package"; exit 1 )
     rm -f ./*.pkg.tar.xz
     makechrootpkg -cur "$CHROOT"
 ) done
