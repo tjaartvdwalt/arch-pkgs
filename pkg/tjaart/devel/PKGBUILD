@@ -17,9 +17,6 @@ optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-s
 # tools
 depends+=(git git-lfs meld)
 
-depends+=(vim)
-depends+=(fzf)
-optdepends+=(vim-tern)
 # languages
 depends+=(jdk-openjdk python nodejs)
 
