@@ -24,8 +24,11 @@ jobs:
 
     # Install dependencies
     - name: Install required dependencies
+      env: # Or as an environment variable
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
       run: |
-        pacman -Sy --noconfirm s3cmd base-devel wget
+        pacman -Sy --noconfirm s3cmd base-devel devtools wget
         wget https://aur.archlinux.org/cgit/aur.git/snapshot/aurutils.tar.gz
         tar -xf aurutils.tar.gz
         chown -R nobody aurutils/
@@ -36,4 +39,8 @@ jobs:
         chown nobody /.gnupg
         sudo -u nobody gpg --recv-key DBE7D3DD8C81D58D0A13D0E76BC26A17B9B7018A
         sudo -u nobody makepkg -sci --noconfirm
-
+        pacman -U --noconfirm aurutils-*-any.pkg.tar.xz
+        cd ..
+        echo "[default]\naccess_key = $AWS_ACCESS_KEY\nsecret_key = $AWS_SECRET_KEY" > $HOME/.s3cfg
+        chmod 0600 $HOME/.s3cfg
+        ./bin/build
