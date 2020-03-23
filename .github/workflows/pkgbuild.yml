@@ -24,22 +24,31 @@ jobs:
 
     # Install dependencies
     - name: Install required dependencies
+      run: |
+        pacman -Sy --noconfirm s3cmd base-devel devtools wget
+        wget https://aur.archlinux.org/cgit/aur.git/snapshot/aurutils.tar.gz
+
+    # - name: Install aurutils
+    #   run: |
+    #     tar -xf aurutils.tar.gz
+    #     chown -R nobody aurutils/
+    #     cd aurutils
+    #    # allow to sudo as nobody without password
+    #     echo "nobody ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    #     mkdir /.gnupg
+    #     chown nobody /.gnupg
+    #     sudo -u nobody gpg --recv-key DBE7D3DD8C81D58D0A13D0E76BC26A17B9B7018A
+    #     sudo -u nobody makepkg -sci --noconfirm
+    #     cd ..
+    - name: Build and upload packages
       env: # Or as an environment variable
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
       run: |
-        pacman -Sy --noconfirm s3cmd base-devel devtools wget
-        wget https://aur.archlinux.org/cgit/aur.git/snapshot/aurutils.tar.gz
-        tar -xf aurutils.tar.gz
-        chown -R nobody aurutils/
-        cd aurutils
-        # allow to sudo as nobody without password
+        echo "[default]\naccess_key = $AWS_ACCESS_KEY\nsecret_key = $AWS_SECRET_KEY" > /.s3cfg
+        # sudo -u nobody chmod 0600 $HOME/.s3cfg
         echo "nobody ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-        mkdir /.gnupg
-        chown nobody /.gnupg
-        sudo -u nobody gpg --recv-key DBE7D3DD8C81D58D0A13D0E76BC26A17B9B7018A
-        sudo -u nobody makepkg -sci --noconfirm
-        cd ..
-        echo "[default]\naccess_key = $AWS_ACCESS_KEY\nsecret_key = $AWS_SECRET_KEY" > $HOME/.s3cfg
-        chmod 0600 $HOME/.s3cfg
+        mkdir -p build/arch-repo
+        # chown nobody /.s3cfg
+        # cat /.s3cfg
         ./bin/build
