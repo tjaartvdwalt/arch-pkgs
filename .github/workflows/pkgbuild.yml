@@ -39,7 +39,6 @@ jobs:
         chown nobody /.gnupg
         sudo -u nobody gpg --recv-key DBE7D3DD8C81D58D0A13D0E76BC26A17B9B7018A
         sudo -u nobody makepkg -sci --noconfirm
-        pacman -U --noconfirm aurutils-*-any.pkg.tar.xz
         cd ..
         echo "[default]\naccess_key = $AWS_ACCESS_KEY\nsecret_key = $AWS_SECRET_KEY" > $HOME/.s3cfg
         chmod 0600 $HOME/.s3cfg
