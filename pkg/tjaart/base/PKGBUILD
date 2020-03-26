@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-base
 pkgver=1.0.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Base for tjaart systems"
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -42,9 +42,10 @@ optdepends+=(pass-audit pass-botp pass-rotate pass-update)
 
 optdepends+=(lfm)
 lfm_config=home/$user/.config/lfm/lfm.ini
-backup+=($lfm_config)
-source+=(lfm.ini)
-md5sums+=('SKIP')
+lfm_keys=home/$user/.config/lfm/lfm.keys
+backup+=($lfm_config $lfm_keys)
+source+=(lfm.ini lfm.keys)
+md5sums+=('SKIP' 'SKIP')
 
 # Print dependencies
 depends+=(cups)
@@ -57,6 +58,7 @@ optdepends+=(vim-tern nerd-fonts-complete)
 package() {
   install -Dm 0640 -o root -g root sshd_config "$pkgdir/$sshd"
   install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
+  install -Dm 0640 -o $uid -g $gid lfm.keys "$pkgdir/$lfm_keys"
   install -Dm 0640 -o $uid -g $gid .zshrc "$pkgdir/$zshrc"
   install -Dm 0640 -o $uid -g $gid .zlogin "$pkgdir/$zlogin"
   install -Dm 0640 -o $uid -g $gid .zprofile "$pkgdir/$zprofile"
