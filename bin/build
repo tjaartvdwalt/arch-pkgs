@@ -7,19 +7,21 @@ REMOTE_PATH=s3://tjaart-arch-pkgs/repo/x86_64
 REPO_NAME=tjaart
 
 LOCAL_PATH="build/arch-repo"
-PACKAGES=($(ls -1 pkg/$REPO_NAME/))
+PACKAGES=$(ls -1 pkg/$REPO_NAME/)
 CHROOT="$HOME/.local/share/arch-root"
 PWD=$(pwd)
 
 for PACKAGE in $PACKAGES; do (
+    echo $PACKAGE
     cd "pkg/$REPO_NAME/$PACKAGE" || ( echo "No such directory: $package"; exit 1 )
     rm -f *.pkg.tar.xz
     chown -R nobody.nobody .
     sudo -u nobody makepkg -cfs --noconfirm
-    mv -f *.pkg.tar.xz ../../../$LOCAL_PATH
+    cp -f *.pkg.tar.xz ../../../$LOCAL_PATH || :
 ) done
 
 cd $PWD
+# Download the existing package database... we will append to this file
 s3cmd sync "$REMOTE_PATH/$REPO_NAME".{db,files}.tar.xz "$LOCAL_PATH/"
 ln -sf "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$LOCAL_PATH/$REPO_NAME.db"
 ln -sf "$LOCAL_PATH/$REPO_NAME.files.tar.xz" "$LOCAL_PATH/$REPO_NAME.files"
