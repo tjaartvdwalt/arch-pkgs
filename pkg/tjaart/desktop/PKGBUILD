@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-desktop
 pkgver=1.0.0
-pkgrel=6
+pkgrel=7
 pkgdesc=""
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -16,12 +16,17 @@ config_home=$pkgdir/home/$user/.config/
 depends+=(sway swaybg swayidle swaylock)
 optdepends+=(swayshot)
 sway_config=home/$user/.config/sway/config
-swaylock_config=home/$user/.config/swaylock/config
 backup+=($sway_config)
-backup+=($swaylock_config)
 source+=(sway.conf)
-source+=(swaylock.conf)
 md5sums+=('SKIP')
+dvorakver=1.0.0-alpha
+backup+=($swaylock_config)
+source+=("https://github.com/tjaartvdwalt/everything-dvorak/archive/${dvorakver}.tar.gz")
+md5sums+=('SKIP')
+
+swaylock_config=home/$user/.config/swaylock/config
+backup+=($swaylock_config)
+source+=(swaylock.conf)
 md5sums+=('SKIP')
 
 source+=(gnu_bg.png)
@@ -76,6 +81,8 @@ package() {
   install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$rofi_config"
   install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/$alacritty_config"
   install -Dm 0644 -o $uid -g $gid fonts.conf "$pkgdir/$font_config"
+  
+  install -Dm 0644 -o $uid -g $gid everything-dvorak-${dvorakver}/xkb/dvp-custom.xkb "$pkgdir/home/$user/.config/xkb/symbols/dvp-custom"
 }
 
 # vim:set ts=2 sw=2 et:
