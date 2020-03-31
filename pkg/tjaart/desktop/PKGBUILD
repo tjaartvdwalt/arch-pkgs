@@ -29,6 +29,14 @@ backup+=($swaylock_config)
 source+=(swaylock.conf)
 md5sums+=('SKIP')
 
+depends+=(py3status)
+py3status_config=home/$user/.config/py3status/py3status.conf
+py3status_secondary_config=home/$user/.config/py3status/py3status_secondary.conf
+backup+=($py3status_config $py3satus_secondary_config)
+source+=(py3status.conf py3status_secondary.conf)
+md5sums+=('SKIP' 'SKIP')
+
+
 source+=(gnu_bg.png)
 md5sums+=('SKIP')
 
@@ -76,12 +84,13 @@ depends+=(otf-fira-code)
 package() {
   install -Dm 0644 -o $uid -g $gid sway.conf "$pkgdir/$sway_config"
   install -Dm 0644 -o $uid -g $gid swaylock.conf "$pkgdir/$swaylock_config"
+  install -Dm 0644 -o $uid -g $gid py3status.conf "$pkgdir/$py3status_config"
+  install -Dm 0644 -o $uid -g $gid py3status_secondary.conf "$pkgdir/$py3status_secondary_config"
   install -Dm 0644 -o $uid -g $gid gnu_bg.png "$pkgdir/home/$user/.config/sway/wallpaper/gnu_bg.png"
-  install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/home/$mako_config"
-  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/home/$rofi_config"
+  install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/$mako_config"
+  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/$rofi_config"
   install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/$alacritty_config"
   install -Dm 0644 -o $uid -g $gid fonts.conf "$pkgdir/$font_config"
-  
   install -Dm 0644 -o $uid -g $gid everything-dvorak-${dvorakver}/xkb/dvp-custom.xkb "$pkgdir/home/$user/.config/xkb/symbols/dvp-custom"
 }
 
