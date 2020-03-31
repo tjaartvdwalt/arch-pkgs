@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-desktop
 pkgver=1.0.0
-pkgrel=7
+pkgrel=8
 pkgdesc=""
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
