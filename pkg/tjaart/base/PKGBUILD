@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-base
 pkgver=1.0.0
-pkgrel=8
+pkgrel=9
 pkgdesc="Base for tjaart systems"
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -16,23 +16,15 @@ config_home=$pkgdir/home/$user/.config/
 depends+=(bash htop mlocate the_silver_searcher wget)
 
 depends+=(openssh)
-sshd_config=etc/ssh/sshd_config
-backup+=($sshd_config)
-source+=(sshd_config)
-md5sums+=('SKIP')
 
 depends+=(pulseaudio pavucontrol pulseaudio-alsa)
 optdepends+=(pulseaudio-ctl)
-pulse_default=etc/pulse/default.pa
+pulse_default=home/$user/.config/pulse/default.pa
 backup+=($pulse_default)
-source+=(default.pa)
+source+=(pulse_default.pa)
 md5sums+=('SKIP')
 
 depends+=(bluez bluez-utils pulseaudio-bluetooth)
-bluetooth_main=etc/bluetooth/main.conf
-backup+=($bluetooth_main)
-source+=(bluetooth_main.conf)
-md5sums+=('SKIP')
 
 depends+=(cmus playerctl)
 
@@ -71,9 +63,7 @@ depends+=(vim)
 optdepends+=(vim-tern nerd-fonts-complete)
 
 package() {
-  install -Dm 0644 -o root -g root sshd_config "$pkgdir/$sshd"
-  install -Dm 0644 -o root -g root default.pa "$pkgdir/$pulse_default"
-  install -Dm 0644 -o root -g root bluetooth_main.conf "$pkgdir/$bluetooth_main"
+  install -Dm 0644 -o $uid -g $gid pulse_default.pa "$pkgdir/$pulse_default"
   install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
   install -Dm 0640 -o $uid -g $gid lfm.keys "$pkgdir/$lfm_keys"
   install -Dm 0640 -o $uid -g $gid .zshrc "$pkgdir/$zshrc"
@@ -82,7 +72,10 @@ package() {
 }
 
 post_install() {
+  sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
   systemctl enable --now sshd.service
+
+  sudo sed -i 's/#AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
   systemctl enable --now bluetooth.service
 }
 
