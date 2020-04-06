@@ -1,7 +1,7 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-base
 pkgver=1.0.0
-pkgrel=7
+pkgrel=8
 pkgdesc="Base for tjaart systems"
 arch=('any')
 url="https://github.com/tjaartvdwalt/arch-pkgs"
@@ -21,7 +21,7 @@ backup+=($sshd_config)
 source+=(sshd_config)
 md5sums+=('SKIP')
 
-depends+=(pulseaudio pulseaudio-alsa pulseaudio-bluetooth bluez-utils)
+depends+=(pulseaudio pavucontrol pulseaudio-alsa)
 optdepends+=(pulseaudio-ctl)
 pulse_default=etc/pulse/default.pa
 backup+=($pulse_default)
