@@ -63,7 +63,7 @@ depends+=(vim)
 optdepends+=(vim-tern nerd-fonts-complete)
 
 package() {
-  install -Dm 0644 -o $uid -g $gid pulse_default.pa "$pkgdir/$pulse_default"
+  install -Dm 0640 -o $uid -g $gid pulse_default.pa "$pkgdir/$pulse_default"
   install -Dm 0640 -o $uid -g $gid lfm.ini "$pkgdir/$lfm_config"
   install -Dm 0640 -o $uid -g $gid lfm.keys "$pkgdir/$lfm_keys"
   install -Dm 0640 -o $uid -g $gid .zshrc "$pkgdir/$zshrc"
