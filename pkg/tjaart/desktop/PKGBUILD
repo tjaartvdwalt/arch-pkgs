@@ -46,12 +46,13 @@ backup+=($mako_config)
 source+=(mako.conf)
 md5sums+=('SKIP')
 
-depends+=(rofi)
+depends+=(wofi)
 optdepends+=(autopass.cr)
-rofi_config=home/$user/.config/rofi/config
-backup+=($rofi_config)
-source+=(rofi.conf)
-md5sums+=('SKIP')
+wofi_config=home/$user/.config/wofi/config
+wofi_style=home/$user/.config/wofi/style.css
+backup+=($wofi_config $wofi_style)
+source+=(wofi.conf wofi_style.css)
+md5sums+=('SKIP' 'SKIP')
 
 
 depends+=(alacritty)
@@ -88,7 +89,8 @@ package() {
   install -Dm 0644 -o $uid -g $gid py3status_secondary.conf "$pkgdir/$py3status_secondary_config"
   install -Dm 0644 -o $uid -g $gid gnu_bg.png "$pkgdir/home/$user/.config/sway/wallpaper/gnu_bg.png"
   install -Dm 0644 -o $uid -g $gid mako.conf "$pkgdir/$mako_config"
-  install -Dm 0644 -o $uid -g $gid rofi.conf "$pkgdir/$rofi_config"
+  install -Dm 0644 -o $uid -g $gid wofi.conf "$pkgdir/$wofi_config"
+  install -Dm 0644 -o $uid -g $gid wofi_style.conf "$pkgdir/$wofi_style"
   install -Dm 0644 -o $uid -g $gid alacritty.yml "$pkgdir/$alacritty_config"
   install -Dm 0644 -o $uid -g $gid fonts.conf "$pkgdir/$font_config"
   install -Dm 0644 -o $uid -g $gid everything-dvorak-${dvorakver}/xkb/dvp-custom.xkb "$pkgdir/home/$user/.config/xkb/symbols/dvp-custom"
