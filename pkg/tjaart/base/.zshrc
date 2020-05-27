@@ -45,8 +45,7 @@ ZSH_CUSTOM=~/.zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(adb archlinux aws bundler chruby cp dirhistory docker docker-compose gem git git-extras gitignore history jsontools kitchen knife node npm nvm pass perl pip rake-fast react-native ruby sudo systemd taskwarrior tmuxinator vagrant virtualenv yarn zsh-navigation-tools)
-
+plugins=(adb archlinux aws bundler chruby cp dirhistory docker docker-compose fzf gem git git-extras gitignore history jsontools kitchen knife node npm nvm pass perl pip rake-fast react-native ruby salesforce-cli-zsh-completion sudo systemd taskwarrior timew tmuxinator vagrant virtualenv yarn zsh-navigation-tools)
 # load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -62,15 +61,18 @@ source $HOME/.alias
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh
+source /home/tjaart/.zsh-custom/plugins/timew/timew-completion.bash
 
 chruby system
-
-# Give arch package name if command is typed that is not installed
-source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # source /usr/share/chruby/auto.sh
 
 # [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESS=' -R'
+
+export FZF_DEFAULT_OPTS='--height 90%'
 
 eval "$(direnv hook zsh)"
 # export TASKRC=~/.task/taskrc
