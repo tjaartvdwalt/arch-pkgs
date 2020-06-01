@@ -25,7 +25,7 @@ jobs:
     # Install dependencies
     - name: Install required dependencies
       run: |
-        pacman -Sy --noconfirm s3cmd base-devel devtools wget
+        pacman -Sy --noconfirm s3cmd base-devel devtools wget nettle
         wget https://aur.archlinux.org/cgit/aur.git/snapshot/aurutils.tar.gz
 
     # - name: Install aurutils
