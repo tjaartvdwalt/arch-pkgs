@@ -1,6 +1,6 @@
 # Maintainer:  <tjaart@tjaart.org>
 pkgname=tjaart-devel
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc=""
 arch=('any')
@@ -9,16 +9,25 @@ license=('MIT')
 groups=(tjaart)
 
 # editors
-depends=(emacs)
-# emacs plugin dependencies
+# language server dependencies
 depends+=(bash-language-server)
 optdepends=(clang ruby-solargraph vscode-html-languageserver-bin yaml-language-server-bin)
 
 # tools
 depends+=(git git-lfs meld)
+gitconfig=home/$user/.gitconfig
+backup+=($gitconfig)
+source+=(gitconfig)
+md5sums+=('SKIP')
 
 # languages
-depends+=(jdk-openjdk python nodejs)
-
+depends+=(jdk-openjdk python nodejs ruby)
 optdepends+=(mycli)
+
+package() {
+  install -Dm 0640 -o $uid -g $gid gitconfig "$pkgdir/$gitconfig"
+}
+
+
+
 # vim:set ts=2 sw=2 et:

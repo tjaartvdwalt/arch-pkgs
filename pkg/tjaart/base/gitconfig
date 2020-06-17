@@ -1,0 +1,54 @@
+[user]
+	email = git@tjaart.org
+	name = Tjaart van der Walt
+	signingkey = 0CBF59E5E54A8DD9710D57D349BA8E6BF02FEB10
+[push]
+	default = simple
+[credential]
+	helper = cache
+[diff]
+	tool = vimdiff
+	trustExitCode = true
+[core]
+	excludesfile = /home/tjaart/.gitignore_global
+[color]
+	ui = auto
+[merge]
+	tool = diffconflicts
+	  trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[fetch]
+	recurseSubmodules = false
+[branch]
+	autoSetupRebase = always
+	autoSetupMerge = always
+[alias]
+	pl = pull --rebase
+	prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
+  webui = !/home/tjaart/.git-webui/release/libexec/git-core/git-webui
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
+	conflicted = !vim +Conflicted
+  s = status
+  co = checkout
+[github]
+	user = tjaartvdwalt
+	oauth-token = 3e70962713168816e931ee045ba1f95d358868a1
+[rerere]
+	enabled = true
+[webui]
+	autoupdate = true
+[pull]
+	rebase = true
+[gitlab]
+	user = tjaart
+[mergetool "vim-conflicted"]
+	cmd = vim +Conflicted
+[mergetool "diffconflicts"]
+	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
+[mergetool]
+	keepBackup = false

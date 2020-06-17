@@ -59,7 +59,7 @@ depends+=(cups)
 optdepends+=(brother-hll2395dw)
 
 # text editor
-depends+=(vim)
+depends+=(vim emacs)
 optdepends+=(vim-tern nerd-fonts-complete)
 
 package() {
@@ -71,11 +71,11 @@ package() {
   install -Dm 0640 -o $uid -g $gid .zprofile "$pkgdir/$zprofile"
 }
 
-post_install() {
-  sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+post_upgrade() {
+  sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
   systemctl enable --now sshd.service
 
-  sudo sed -i 's/#AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
+  sed -i 's/#AutoEnable=false/AutoEnable=true/' /etc/bluetooth/main.conf
   systemctl enable --now bluetooth.service
 }
 
