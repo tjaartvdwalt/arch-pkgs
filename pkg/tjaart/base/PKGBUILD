@@ -13,7 +13,7 @@ uid=1000
 gid=1000
 config_home=$pkgdir/home/$user/.config/
 
-depends+=(bash htop mlocate the_silver_searcher wget)
+depends+=(bash htop mlocate the_silver_searcher)
 
 depends+=(openssh)
 
